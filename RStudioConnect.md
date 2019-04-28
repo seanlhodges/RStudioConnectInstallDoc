@@ -25,22 +25,9 @@ In Ubuntu, you can install build dependencies with
 sudo apt-get build-dep r-base
 ```
 
-These may also be helpful later on when you attempt to build R from source (these are probably not all required on the target OS - I was doing some test builds of R on a Raspberry Pi, and it was a few libraries down ... understandably)
+Second, you should download and unpack the [source tarball](https://cran.r-project.org/src/base/R-3/R-3.6.0.tar.gz) for the version of R that you want to install from CRAN (downloading and compiling a few of the tarballs from previous versions would be beneficial (3.1.3 ,3.2.5 ,3.3.3, 3.4.4, 3.5.2), along with setting a schedule to keep R versions up to date) 
 
-```
-sudo apt-get install build-essential
-sudo apt-get install libbz2-dev
-sudo apt-get install fort77
-sudo apt-get install xorg-dev
-sudo apt-get install liblzma-dev  libblas-dev gfortran
-sudo apt-get install gcc-multilib
-sudo apt-get install gobjc++
-sudo apt-get install libreadline-dev
-```
-
-Second, you should download and unpack the [source tarball](https://cran.r-project.org/src/base/R-3/R-3.6.0.tar.gz) for the version of R that you want to install from CRAN (downloading a compilng few of the tarballs from previous versions would also be useful, along with setting a schedule to keep R versions up to date) 
-
-To install `R-3.6.0`, this might look like the following:
+To install `R-3.6.0`:
 
 ```console
 # Download and extract source code
@@ -50,7 +37,7 @@ tar -xzvf R-3.6.0.tar.gz
 cd R-3.6.0
 ```
 
-The final step is to configure, make, and install R. The recommended install location for RStudio Connect is at `/opt/R/3.6.0`.
+The final step is to configure, make, and install R. The recommended install location, for use by RStudio Connect, is at `/opt/R/3.6.0`.
 
 ```console
 # Build R from source
@@ -67,20 +54,7 @@ sudo make install
 
 **It is very important that the R installation folder is not moved once it is installed from source. Libraries are statically linked, so moving the folder will break the installation of R.**
 
-To test that the installation[^1] went smoothly, execute:
-
-[^1]: If you wish to make this non-standard location for R, the default R install, you need to do two tings
-
-	* First of all, you should make sure that the `R` executable has in fact the required permissions.
-
-		`sudo chmod a+rx /opt/R/3.6.0/bin/R`
-
-	* Then you can create a symbolic link:
-
-		`sudo ln -s /opt/R/3.6.0/bin/R /usr/local/bin`
-
-	Using a link carries some security risks (for example when `/opt/R/3.6.0/bin/R` can be written by non-root users).
-
+To test that the installation went smoothly, execute:
 
 ```console
 /opt/R/3.6.0/bin/R --version
@@ -107,18 +81,17 @@ http://www.gnu.org/licenses/.
 
 The following system dependencies are required by many common R packages and nearly all deployments will need to provide these. These package names may vary slightly between different versions of Ubuntu.
 
-```
-ibcurl4-gnutls-dev
-openjdk-7-* # may require also executing `R CMD javareconf`
-libxml2-dev
-libssl-dev
-texlive-full # very large dependency, but needed to render PDF documents from R Markdown
-```
+* `build-essential`
+* `libcurl4-gnutls-dev`
+* `openjdk-7-*` # may require also executing `R CMD javareconf`
+* `libxml2-dev`
+* `libssl-dev`
+* `texlive-full` # very large dependency, but needed to render PDF documents from R Markdown
 
-Typically, the following will do the trick:
+Typically, the following commands at the console will do the trick:
 
 ```console
-sudo apt-get install libcurl4-gnutls-dev libxml2-dev libssl-dev texlive-full
+sudo apt-get install build-essential libcurl4-gnutls-dev libxml2-dev libssl-dev texlive-full
 sudo apt install openjdk-11-jdk
 sudo R CMD javareconf
 ```
@@ -133,9 +106,10 @@ You will use `gdebi` to install Connect and its dependencies. It is installed vi
 sudo apt-get install gdebi-core
 ```
 
-You should have a `.deb` installer for RStudio Connect. It can be downloaded from the RStudio website. If you only have a link to this file, you can use `wget` to download the file to the current directory.
+You should have a `.deb` installer for RStudio Connect. It can be downloaded from the RStudio website (the link is provided by email when you register for the download). If you only have a link to this file, you can use `wget` to download the file to the current directory.
 
 ```console
+cd /tmp
 wget https://<download-url>/rstudio-connect_1.7.2.2-14_amd64.deb
 ```
 
@@ -151,8 +125,23 @@ This will install Connect into `/opt/rstudio-connect/`, and create a new rstudio
 
 RStudio Connect is controlled by the `/etc/rstudio-connect/rstudio-connect.gcfg` configuration file. You will edit this file to make server-wide configuration changes to the system.
 
+Make the following initial settings to this file to set up email and AD.
+
+### 4.1 Email
+
+*Discuss with IT*
+
+### 4.2 Active Directory or SAML?
+
+*Discuss with IT*
+
+-----
+
 Restart RStudio Connect after altering the rstudio-connect.gcfg configuration file.
 
 `sudo systemctl restart rstudio-connect`
 
+## 5. Test deployment
 
+
+## 6. Production Configuration Settings 
