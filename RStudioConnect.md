@@ -1,8 +1,8 @@
-# RStudio Connect: Build Guide
+# RStudio Connect: Build Guide for Horizons
 
 |Property|Value|
 |:--|:--|
-|OS|Ubuntu 18.04.xx|
+|Target OS|Ubuntu 18.04.xx|
 |Reference| [RStudio Connect: Admin Guide](https://docs.rstudio.com/connect/admin/index.html)|
 
 ## Checklist
@@ -14,7 +14,7 @@
 - [ ] Test deployment
 
 ## 1. Install R
- Administrators should install the versions of R that they wish to support from source so that user content is run in an environment as close as possible to the development environment. This allows maintenance of multiple versions of R simultaneously and mitigates the risk associated with updating the version of R.
+ Administrators of the RStudioConnect box should install the versions of R that they wish to support from source so that user content is run in an environment as close as possible to the development environment. This allows maintenance of multiple versions of R simultaneously and mitigates the risk associated with updating the version of R.
  
 To build R from source, first, acquire the build dependencies for R.
 
