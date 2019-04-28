@@ -4,6 +4,7 @@
 |:--|:--|
 |Target OS|Ubuntu 18.04.xx|
 |Reference| [RStudio Connect: Admin Guide](https://docs.rstudio.com/connect/admin/index.html)|
+|Compiled by|Sean Hodges|
 
 ## Checklist
 
@@ -24,7 +25,7 @@ In Ubuntu, you can install build dependencies with
 sudo apt-get build-dep r-base
 ```
 
-These may also be helpful later on when you attempt to build R from source
+These may also be helpful later on when you attempt to build R from source (these are probably not all required on the target OS - I was doing some test builds of R on a Raspberry Pi, and it was a few libraries down ... understandably)
 
 ```
 sudo apt-get install build-essential
@@ -37,7 +38,9 @@ sudo apt-get install gobjc++
 sudo apt-get install libreadline-dev
 ```
 
-Second, you should download and unpack the [source tarball](https://cran.r-project.org/src/base/R-3/R-3.6.0.tar.gz) for the version of R that you want to install from CRAN. To install `R-3.6.0`, this might look like the following:
+Second, you should download and unpack the [source tarball](https://cran.r-project.org/src/base/R-3/R-3.6.0.tar.gz) for the version of R that you want to install from CRAN (downloading a compilng few of the tarballs from previous versions would also be useful, along with setting a schedule to keep R versions up to date) 
+
+To install `R-3.6.0`, this might look like the following:
 
 ```console
 # Download and extract source code
@@ -85,9 +88,9 @@ To test that the installation[^1] went smoothly, execute:
 Your output should look something like:
 
 ```
-R version 3.5.3 (2019-03-11) -- "Great Truth"
+R version 3.6.0 (2019-04-26) -- "Planting of a Tree"
 Copyright (C) 2019 The R Foundation for Statistical Computing
-Platform: armv7l-unknown-linux-gnueabihf (32-bit)
+Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under the terms of the
