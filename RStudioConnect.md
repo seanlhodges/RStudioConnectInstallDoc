@@ -90,12 +90,12 @@ The following system dependencies are required by many common R packages and nea
 * `libblas-dev`
 * `libpack-dev`
 * `libudunits2-dev`
-* `libgdal`
+* `libgdal-dev`
 
 Typically, the following commands at the console will do the trick:
 
 ```console
-sudo apt-get install build-essential libcurl4-gnutls-dev libxml2-dev libssl-dev texlive-full libblas-dev libpack-dev libudunits2-dev libgdal
+sudo apt-get install build-essential libcurl4-gnutls-dev libxml2-dev libssl-dev texlive-full libblas-dev libpack-dev libudunits2-dev libgdal-dev
 sudo apt install openjdk-11-jdk
 sudo R CMD javareconf
 ```
