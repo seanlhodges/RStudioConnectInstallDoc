@@ -138,7 +138,7 @@ Set SenderEmail to the service desk email.
 ### 4.2 Active Directory
 Adding LDAP authentication is done through setting `Provider  = ldap` under the `[Authentication]` section of the config file.
 
-LDAP settings were obtained from IT, and stored in Password1. Copy these settings to any new instance of RStudio Connect.
+LDAP settings were obtained from IT, and stored in 1Password - search for zRStudioLDAP. Copy these settings to any new instance of RStudio Connect.
 
 -----
 
