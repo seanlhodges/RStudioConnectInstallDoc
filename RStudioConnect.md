@@ -133,11 +133,12 @@ Make the following initial settings to this file to set up email and AD.
 
 ### 4.1 Email
 
-*Discuss with IT*
+Set SenderEmail to the service desk email.
 
-### 4.2 Active Directory or SAML?
+### 4.2 Active Directory
+Adding LDAP authentication is done through setting `Provider  = ldap` under the `[Authentication]` section of the config file.
 
-*Discuss with IT*
+LDAP settings were obtained from IT, and stored in Password1. Copy these settings to any new instance of RStudio Connect.
 
 -----
 
