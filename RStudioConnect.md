@@ -159,8 +159,9 @@ RStudioConnect expects to compile packages from source, but this is not possible
 
 ### 7.1 Copy the Package
 
-1. Winscp the hilltopserver package to a user folder on the RStudio-Connect box
-2. Set up user libary folders for R packages. Reviewing StackOverflow and other support sites, this documentation will advise using the following location to set this up: `/usr/local/share`. Within this location, create an `rpkgs` directory, and beneath that, directories for each major and minor versions of R.
+1. `scp` the hilltopserver package to a user folder on the RStudio-Connect box. There are a number of methods for achieving this. The simplest is to use WinSCP.
+
+2. Set up user libary folders for R packages. Reviewing StackOverflow and other support sites, this documentation suggests using the following location to set this up: `/usr/local/share` (the documentation assumes this location is being used). Within this location, create an `rpkgs` directory, and beneath that, directories for each major and minor versions of R.
 
 ``` console
 # Example
@@ -181,17 +182,19 @@ sudo cp -r ~/HilltopServer 3.5/
 sudo cp -r ~/HilltopServer 3.6/
 ```
 
-3. Now, for each R environment, edit the `Renviron` files: 
+3. Now, for each R environment, edit the `Renviron` file: 
 
 ``` console
+# Editing for R version 3.4.x
 cd /opt/R/3.4.2/lib/R/etc
 sudo nano Renviron
 ```
 
-Edit the `R_LIBS_USER` variable in the `Renviron` file, ensuring that any other entries for this variable are hashed out.
+Now, edit the `R_LIBS_USER` variable in the `Renviron` file, ensuring that any other entries for this variable are hashed out.
 
 `R_LIBS_USER=${R_LIBS_USERS-'/usr/local/share/rpkgs/3.4'}`
 
+Repeat for each version of R installed, using the appropriate major.minor version numbers.
 
 ### 7.2 Edit the config file
 
