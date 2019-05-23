@@ -163,7 +163,12 @@ RStudioConnect expects to compile packages from source, but this is not possible
 
 Add the following section to the config file
 
-`[Packages]
+``` console
+[Packages]
 External = HilltopServer`
+```
 
+Restart the server
+
+`sudo systemctl restart rstudio-connect`
 
