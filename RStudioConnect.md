@@ -159,16 +159,47 @@ RStudioConnect expects to compile packages from source, but this is not possible
 
 ### 7.1 Copy the Package
 
+1. Winscp the hilltopserver package to a user folder on the RStudio-Connect box
+2. Set up user libary folders for R packages. Reviewing StackOverflow and other support sites, this documentation will advise using the following location to set this up: `/usr/local/share`. Within this location, create an `rpkgs` directory, and beneath that, directories for each major and minor versions of R.
+
+``` console
+# Example
+cd /usr/local/share
+sudo mkdir rpkgs
+cd rpkgs
+sudo mkdir 3.4
+sudo mkdir 3.5
+sudo mkdir 3.6
+```
+
+2. For each R version directory that has been created, copy the HilltopServer package across from the user folder
+
+``` console
+# These commands are executed from /usr/local/share/rpkgs
+sudo cp -r ~/HilltopServer 3.4/
+sudo cp -r ~/HilltopServer 3.5/
+sudo cp -r ~/HilltopServer 3.6/
+```
+
+3. Now, for each R environment that is installed, the path to the user libraries needs to be updated. 
+
+``` console
+cd /opt/R/3.4.2/lib/R/etc
+sudo nano Renviron
+```
+
+
+
 ### 7.2 Edit the config file
 
 Add the following section to the config file
 
 ``` console
 [Packages]
-External = HilltopServer`
+External = HilltopServer
 ```
 
-Restart the server
+Restart the RStudio-Connect server
 
 `sudo systemctl restart rstudio-connect`
 
