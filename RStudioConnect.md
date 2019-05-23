@@ -181,23 +181,29 @@ sudo cp -r ~/HilltopServer 3.5/
 sudo cp -r ~/HilltopServer 3.6/
 ```
 
-3. Now, for each R environment that is installed, the path to the user libraries needs to be updated. 
+3. Now, for each R environment, edit the `Renviron` files: 
 
 ``` console
 cd /opt/R/3.4.2/lib/R/etc
 sudo nano Renviron
 ```
 
+Edit the `R_LIBS_USER` variable in the `Renviron` file, ensuring that any other entries for this variable are hashed out.
+
+`R_LIBS_USER=${R_LIBS_USERS-'/usr/local/share/rpkgs/3.4'}`
 
 
 ### 7.2 Edit the config file
 
-Add the following section to the config file
+As a final step, to make RStudio-Connect aware of the manually installed pacage, add the following section to the config file.
 
 ``` console
 [Packages]
 External = HilltopServer
 ```
+
+This setting will force RStudio-Connect to skip compilation when it strikes this package in a project that is being uploaded. Many `External = ` items can be added on new lines in this section.
+
 
 Restart the RStudio-Connect server
 
