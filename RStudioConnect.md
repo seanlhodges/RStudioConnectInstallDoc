@@ -13,6 +13,7 @@
 - [ ] Download & install RStudio Connect
 - [ ] Edit RStudio Connect config file
 - [ ] Test deployment
+- [ ] Adding the HilltopServer package
 
 ## 1. Install R
  Administrators of the RStudioConnect box should install the versions of R that they wish to support from source so that user content is run in an environment as close as possible to the development environment. This allows maintenance of multiple versions of R simultaneously and mitigates the risk associated with updating the version of R.
@@ -150,3 +151,19 @@ Restart RStudio Connect after altering the rstudio-connect.gcfg configuration fi
 
 
 ## 6. Production Configuration Settings 
+
+## 7. Setting up HilltopServer package
+HilltopServer is a proprietery software package that handles requests for timeseries data. Accessing timeseries data through HilltopServer is a necessary capability for Horizons.
+
+RStudioConnect expects to compile packages from source, but this is not possible for the HilltopServer package. The steps required to install this package are as follows
+
+### 7.1 Copy the Package
+
+### 7.2 Edit the config file
+
+Add the following section to the config file
+
+`[Packages]
+External = HilltopServer`
+
+
