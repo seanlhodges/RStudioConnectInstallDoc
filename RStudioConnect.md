@@ -111,6 +111,7 @@ You will use `gdebi` to install Connect and its dependencies. It is installed vi
 sudo apt-get install gdebi-core
 ```
 
+**The instructions below relate to the installation of the 45 day trial version of RStudio Connect. Production version instructions are provided elsewhere**
 You should have a `.deb` installer for RStudio Connect. It can be downloaded from the RStudio website (the link is provided by email when you register for the download). If you only have a link to this file, you can use `wget` to download the file to the current directory.
 
 ```console
