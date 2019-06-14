@@ -3,9 +3,10 @@
 |Property|Value|
 |:--|:--|
 |Target OS|Ubuntu 18.04.xx|
+|Privileges|sudo|
 |Reference| [RStudio Connect: Admin Guide](https://docs.rstudio.com/connect/admin/index.html)|
 |Compiled by|Sean Hodges|
-
+|Last updated|2019-06-15|
 ## Checklist
 
 - [ ] Install R
@@ -111,7 +112,7 @@ You will use `gdebi` to install Connect and its dependencies. It is installed vi
 sudo apt-get install gdebi-core
 ```
 
-**The instructions below relate to the installation of the 45 day trial version of RStudio Connect. Production version instructions are provided elsewhere**
+**The instructions below relate to the installation of the 45 day trial version of RStudio Connect as at May 2019.**
 You should have a `.deb` installer for RStudio Connect. It can be downloaded from the RStudio website (the link is provided by email when you register for the download). If you only have a link to this file, you can use `wget` to download the file to the current directory.
 
 ```console
@@ -126,6 +127,25 @@ sudo gdebi rstudio-connect_1.7.2.2-14_amd64.deb
 ```
 
 This will install Connect into `/opt/rstudio-connect/`, and create a new rstudio-connect user.
+
+**The instructions below relate to the installation of the Commercial version of RStudio Connect as at June 2019.**
+RStudio only provides (as at June 2019) a pre-built binary for the 64-bit architecture. Pre-install checklist:
+
+These steps will install RStudio Connect:
+
+```console
+cd /tmp
+wget https://s3.amazonaws.com/rstudio-connect/rstudio-connect_1.7.4.2-16_amd64.deb
+```
+
+Once the `.deb` file is available locally, run the following command to install RStudio Connect.
+
+``` console
+sudo gdebi rstudio-connect_1.7.4.2-16_amd64.deb
+```
+
+This will install Connect into `/opt/rstudio-connect/`, and create a new rstudio-connect user.
+
 
 ## 4. Edit RStudio Connect config file
 
