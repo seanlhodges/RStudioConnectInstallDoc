@@ -17,8 +17,10 @@
 - [ ] Adding the HilltopServer package
 
 ## 1. Install R
- Administrators of the RStudioConnect box should install the versions of R that they wish to support from source so that user content is run in an environment as close as possible to the development environment. This allows maintenance of multiple versions of R simultaneously and mitigates the risk associated with updating the version of R.
- 
+Administrators of the RStudioConnect box should install the versions of R that they wish to support from source so that user content is run in an environment as close as possible to the development environment. This allows maintenance of multiple versions of R simultaneously and mitigates the risk associated with updating the version of R.
+
+Ensure that the `src` URI's in `sources.list` are uncommmented, as various libraries and packages will need to be built from source. Without this, the `sudo apt-get build-dep` will error.
+
 To build R from source, first, acquire the build dependencies for R.
 
 In Ubuntu, you can install build dependencies with
