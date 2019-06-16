@@ -114,25 +114,9 @@ You will use `gdebi` to install Connect and its dependencies. It is installed vi
 ```console
 sudo apt-get install gdebi-core
 ```
+### 3.1 Software Installation 
 
-**The instructions below relate to the installation of the 45 day trial version of RStudio Connect as at May 2019.**
-You should have a `.deb` installer for RStudio Connect. It can be downloaded from the RStudio website (the link is provided by email when you register for the download). If you only have a link to this file, you can use `wget` to download the file to the current directory.
-
-```console
-cd /tmp
-wget https://<download-url>/rstudio-connect_1.7.2.2-14_amd64.deb
-```
-
-Once the `.deb` file is available locally, run the following command to install RStudio Connect.
-
-```console
-sudo gdebi rstudio-connect_1.7.2.2-14_amd64.deb
-```
-
-This will install Connect into `/opt/rstudio-connect/`, and create a new rstudio-connect user.
-
-**The instructions below relate to the installation of the Commercial version of RStudio Connect as at June 2019.**
-RStudio only provides (as at June 2019) a pre-built binary for the 64-bit architecture. Pre-install checklist:
+RStudio only provides (as at June 2019) a pre-built binary for the 64-bit architecture.
 
 These steps will install RStudio Connect:
 
@@ -148,6 +132,39 @@ sudo gdebi rstudio-connect_1.7.4.2-16_amd64.deb
 ```
 
 This will install Connect into `/opt/rstudio-connect/`, and create a new rstudio-connect user.
+
+### 3.2 Supplemental packages
+
+There are additional system dependencies that may be required for some R packages depending on the types of R packages your users are leveraging. You could consider providing these packages for your users now, or wait until they are requested.
+
+```console
+libgmp10-dev
+libgsl0-dev
+libnetcdf6
+libnetcdf-dev
+netcdf-bin
+libdigest-hmac-perl
+libgmp-dev
+libgmp3-dev
+libgl1-mesa-dev
+libglu1-mesa-dev
+libglpk-dev
+tdsodbc
+freetds-bin
+freetds-common
+freetds-dev
+odbc-postgresql
+libtiff-dev
+libsndfile1
+libsndfile1-dev
+libtiff-dev
+tk8.5
+tk8.5-dev
+tcl8.5
+tcl8.5-dev
+libgsl0-dev
+libv8-dev
+```
 
 
 ## 4. Edit RStudio Connect config file
@@ -171,8 +188,12 @@ Restart RStudio Connect after altering the rstudio-connect.gcfg configuration fi
 
 `sudo systemctl restart rstudio-connect`
 
-## 5. Test deployment
+## 5. Activate License
 
+```console
+sudo /opt/rstudio-connect/bin/license-manager activate <license code>
+sudo systemctl restart rstudio-connect
+```
 
 ## 6. Production Configuration Settings 
 
