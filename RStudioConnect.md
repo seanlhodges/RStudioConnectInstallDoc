@@ -3,9 +3,10 @@
 |Property|Value|
 |:--|:--|
 |Target OS|Ubuntu 18.04.xx|
+|Privileges|sudo|
 |Reference| [RStudio Connect: Admin Guide](https://docs.rstudio.com/connect/admin/index.html)|
 |Compiled by|Sean Hodges|
-
+|Last updated|2019-06-15|
 ## Checklist
 
 - [ ] Install R
@@ -16,8 +17,10 @@
 - [ ] Adding the HilltopServer package
 
 ## 1. Install R
- Administrators of the RStudioConnect box should install the versions of R that they wish to support from source so that user content is run in an environment as close as possible to the development environment. This allows maintenance of multiple versions of R simultaneously and mitigates the risk associated with updating the version of R.
- 
+Administrators of the RStudioConnect box should install the versions of R that they wish to support from source so that user content is run in an environment as close as possible to the development environment. This allows maintenance of multiple versions of R simultaneously and mitigates the risk associated with updating the version of R.
+
+Ensure that the `src` URI's in `sources.list` are uncommmented, as various libraries and packages will need to be built from source. Without this, the `sudo apt-get build-dep` will error.
+
 To build R from source, first, acquire the build dependencies for R.
 
 In Ubuntu, you can install build dependencies with
@@ -96,8 +99,9 @@ The following system dependencies are required by many common R packages and nea
 Typically, the following commands at the console will do the trick:
 
 ```console
-sudo apt-get install build-essential libcurl4-gnutls-dev libxml2-dev libssl-dev texlive-full libblas-dev libpack-dev libudunits2-dev libgdal-dev
-sudo apt install openjdk-11-jdk
+sudo apt-get install build-essential libcurl4-gnutls-dev libxml2-dev libssl-dev texlive-full libblas-dev libudunits2-dev libgdal-dev
+sudo apt-get libpack-dev
+# sudo apt install openjdk-11-jdk ## This was already installed on production environment
 sudo R CMD javareconf
 ```
 
@@ -110,21 +114,58 @@ You will use `gdebi` to install Connect and its dependencies. It is installed vi
 ```console
 sudo apt-get install gdebi-core
 ```
+### 3.1 Software Installation 
 
-You should have a `.deb` installer for RStudio Connect. It can be downloaded from the RStudio website (the link is provided by email when you register for the download). If you only have a link to this file, you can use `wget` to download the file to the current directory.
+RStudio only provides (as at June 2019) a pre-built binary for the 64-bit architecture.
+
+These steps will install RStudio Connect:
 
 ```console
 cd /tmp
-wget https://<download-url>/rstudio-connect_1.7.2.2-14_amd64.deb
+wget https://s3.amazonaws.com/rstudio-connect/rstudio-connect_1.7.4.2-16_amd64.deb
 ```
 
 Once the `.deb` file is available locally, run the following command to install RStudio Connect.
 
-```console
-sudo gdebi rstudio-connect_1.7.2.2-14_amd64.deb
+``` console
+sudo gdebi rstudio-connect_1.7.4.2-16_amd64.deb
 ```
 
 This will install Connect into `/opt/rstudio-connect/`, and create a new rstudio-connect user.
+
+### 3.2 Supplemental packages
+
+There are additional system dependencies that may be required for some R packages depending on the types of R packages your users are leveraging. You could consider providing these packages for your users now, or wait until they are requested.
+
+```console
+libgmp10-dev
+libgsl0-dev
+libnetcdf6
+libnetcdf-dev
+netcdf-bin
+libdigest-hmac-perl
+libgmp-dev
+libgmp3-dev
+libgl1-mesa-dev
+libglu1-mesa-dev
+libglpk-dev
+tdsodbc
+freetds-bin
+freetds-common
+freetds-dev
+odbc-postgresql
+libtiff-dev
+libsndfile1
+libsndfile1-dev
+libtiff-dev
+tk8.5
+tk8.5-dev
+tcl8.5
+tcl8.5-dev
+libgsl0-dev
+libv8-dev
+```
+
 
 ## 4. Edit RStudio Connect config file
 
@@ -147,8 +188,12 @@ Restart RStudio Connect after altering the rstudio-connect.gcfg configuration fi
 
 `sudo systemctl restart rstudio-connect`
 
-## 5. Test deployment
+## 5. Activate License
 
+```console
+sudo /opt/rstudio-connect/bin/license-manager activate <license code>
+sudo systemctl restart rstudio-connect
+```
 
 ## 6. Production Configuration Settings 
 
